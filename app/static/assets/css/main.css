@@ -3030,10 +3030,10 @@
 	#banner {
 		background-attachment: scroll,							fixed;
 		background-color: #666;
-		background-image: url("images/overlay.png"), url("../../images/banner.jpg");
-		background-position: top left,						center center;
-		background-repeat: repeat,							no-repeat;
-		background-size: auto,							cover;
+		background-image: url("images/campus.jpg"), url("../../images/banner.jpg");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
 		color: #fff;
 		padding: 12em 0 20em 0;
 		text-align: center;
@@ -3044,19 +3044,30 @@
 		}
 
 		#banner h2, #banner h3, #banner h4, #banner h5, #banner h6 {
-			color: #fff;
+			color: #db9cff;
 		}
 
 		#banner h2 {
-			font-size: 3.5em;
+			font-size: 85px;
 			line-height: 1em;
 			margin: 0 0 0.5em 0;
 			padding: 0;
-		}
+			font-weight: 900;
+			margin-bottom: 15px;
+			margin-top: 0;
+			text-transform: uppercase;
+			text-shadow: 1px 1px 1px #666,
+	  	             3px 3px 8px black;
+			}
 
 		#banner p {
-			font-size: 1.25em;
+			font-size: 30px;
 			margin-bottom: 1.75em;
+			color: #fff;
+			text-shadow: -1px -1px 1px #aaa,
+						 0px 4px 1px rgba(0,0,0,0.5),
+						 4px 4px 5px rgba(0,0,0,0.7),
+						 0px 0px 7px rgba(0,0,0,0.4);
 		}
 
 		#banner input[type="submit"],
