@@ -1,7 +1,17 @@
-Flasky
-======
+Project "Crepe" for CS213
 
-This repository contains the source code examples for my O'Reilly book [Flask Web Development](http://www.flaskbook.com).
+To start using:
 
-The commits and tags in this repository were carefully created to match the sequence in which concepts are presented in the book. Please read the section titled "How to Work with the Example Code" in the book's preface for instructions.
+install virtual environment with:
+sudo easy_install virtualenv
 
+set up virtual environment (although it's already set up in the repo so you can skip this step):
+virtualenv venv
+
+activate the virtual environment with:
+source venv/bin/activate
+
+You want to activate the environment any time you want to run the server. To deactivate the environment, input "deactivate" into the terminal
+
+Run the server with the command:
+python3 manage.py runserver
