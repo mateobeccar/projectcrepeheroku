@@ -3044,7 +3044,7 @@
 		}
 
 		#banner h2, #banner h3, #banner h4, #banner h5, #banner h6 {
-			color: #db9cff;
+			color: #fff;
 		}
 
 		#banner h2 {
@@ -3061,22 +3061,20 @@
 			}
 
 		#banner p {
-			font-size: 30px;
+			font-size: 25px;
 			margin-bottom: 1.75em;
 			color: #fff;
-			text-shadow: -1px -1px 1px #aaa,
-						 0px 4px 1px rgba(0,0,0,0.5),
-						 4px 4px 5px rgba(0,0,0,0.7),
-						 0px 0px 7px rgba(0,0,0,0.4);
 		}
 
 		#banner input[type="submit"],
 		#banner input[type="reset"],
 		#banner input[type="button"],
 		#banner .button {
-			background-color: transparent;
+			background-color: #add4f9;
 			box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
-			color: #fff;
+			text-shadow: 1px 1px 1px #666,
+						 3px 3px 8px black;
+			color: #fff !important;
 			min-width: 12em;
 		}
 
@@ -3098,9 +3096,26 @@
 			#banner input[type="reset"].special,
 			#banner input[type="button"].special,
 			#banner .button.special {
-				background: #fff;
-				color: #666 !important;
+				background: #efc3ff;
+				text-shadow: 1px 1px 1px #666,
+		  	             3px 3px 8px black;
+				color: #fff !important;
 			}
+
+			#banner input[type="submit"]:active,
+			#banner input[type="reset"]:active,
+			#banner input[type="button"]:active,
+			#banner .button.special:active {
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+
+			#banner input[type="submit"]:hover,
+			#banner input[type="reset"]:hover,
+			#banner input[type="button"]:hover,
+			#banner .button.special:hover {
+				background-color: rgba(255, 255, 255, 0.1);
+			}
+
 
 /* Main */
 
