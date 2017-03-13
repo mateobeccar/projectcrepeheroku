@@ -59,8 +59,8 @@
 /* Containers */
 
 	.container {
-		margin-left: auto;
-		margin-right: auto;
+		margin-left:auto;
+		margin-right:auto;
 	}
 
 	.container.\31 25\25 {
@@ -158,7 +158,7 @@
 		}
 
 		.container {
-			width: 90%;
+			width: 60%;
 		}
 
 	}
@@ -192,7 +192,7 @@
 	@media screen and (max-width: 736px) {
 
 		.container.\31 25\25 {
-			width: 100%;
+			width: 50%;
 			max-width: 125%;
 			min-width: 100%;
 		}
@@ -3136,7 +3136,7 @@
 			#main > header p {
 				border-top: solid 2px #e5e5e5;
 				color: #777;
-				display: inline-block;
+				display: flex;
 				font-style: normal;
 				margin: 1em 0 0 0;
 				padding: 1em 0 1.25em 0;
@@ -3785,3 +3785,51 @@
 			}
 
 	}
+
+	#signup {
+		background-color: rgb(51, 42, 146);
+	}
+
+	#landing {
+		width: 50%;
+	}
+
+#landpic {
+width:100%;
+height:580px;
+}
+
+#landpic2{
+	height: 580px;
+}
+
+.flex-container{
+	margin-top:0px;
+	 display: -webkit-flex;
+}
+
+.flex-item{
+	margin-left: 0px;
+}
+.flex-item2{
+	margin-right: 0px;
+	margin-left: 0px;
+	height: 580px;
+}
+.box.landing {
+	width: 35%;
+	height: 580px;
+}
+.box.landing p{
+	text-align: center;
+	font-size: 18px;
+}
+
+#landheader {
+	margin-top: 5%;
+	margin-left: 2%;
+	color: #000000;
+	font-size: 48px;
+	font-weight: 500;
+
+}

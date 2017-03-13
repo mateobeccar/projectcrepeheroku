@@ -13,6 +13,9 @@ from ..decorators import admin_required, permission_required
 def index():
     return render_template('index.html')
 
+@main.route('/landing', methods=['GET', 'POST'])
+def landing():
+    return render_template('landing.html')
 
 @main.route('/user/<username>')
 def user(username):

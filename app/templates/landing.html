@@ -6,11 +6,11 @@
 -->
 <html>
 	<head>
-		<title>Contact - Alpha by HTML5 UP</title>
+		<title>Campus Rep</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/main.css') }}">
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body>
@@ -18,39 +18,23 @@
 
 			<!-- Header -->
 				<header id="header">
-					<h1><a href="index.html">Alpha</a> by HTML5 UP</h1>
+					<h1><a href="index.html">Campus</a> Rep</h1>
 					<nav id="nav">
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li>
-								<a href="#" class="icon fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
 							<li><a href="#" class="button">Sign Up</a></li>
 						</ul>
 					</nav>
 				</header>
 
 			<!-- Main -->
-				<section id="main" class="container 75%">
-					<header>
-						<h2>Contact Us</h2>
-						<p>Tell us what you think about our little operation.</p>
-					</header>
-					<div class="box">
+			<h2 id='landheader'> Your Campus is a Special Place. Help a Company Understand That.</h2>
+			<div class='flex-container'>
+				<div class="flex-item">
+					<img id="landpic" src="{{ url_for('static', filename='images/students.jpg') }}">
+				</div>
+					<div class="box landing">
+						<h3> <center> Be Notified When We Launch </center> </h3>
 						<form method="post" action="#">
 							<div class="row uniform 50%">
 								<div class="6u 12u(mobilep)">
@@ -60,26 +44,22 @@
 									<input type="email" name="email" id="email" value="" placeholder="Email" />
 								</div>
 							</div>
-							<div class="row uniform 50%">
-								<div class="12u">
-									<input type="text" name="subject" id="subject" value="" placeholder="Subject" />
-								</div>
-							</div>
-							<div class="row uniform 50%">
-								<div class="12u">
-									<textarea name="message" id="message" placeholder="Enter your message" rows="6"></textarea>
-								</div>
-							</div>
 							<div class="row uniform">
 								<div class="12u">
 									<ul class="actions align-center">
-										<li><input type="submit" value="Send Message" /></li>
+										<li><input type="submit" id="signup" value="Sign Up" /></li>
 									</ul>
 								</div>
 							</div>
 						</form>
+						<p> Stay up to date with the latest developments from Campus Rep,
+						your new source of engaging campus jobs</p>
 					</div>
-				</section>
+					<div class="flex-item2">
+						<img id='landpic2' src="{{ url_for('static', filename='images/students2.jpg') }}">
+					</div>
+
+			</div>
 
 			<!-- Footer -->
 				<footer id="footer">
@@ -99,13 +79,12 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery.dropotron.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery.scrollgress.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/skel.min.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/util.js')}}"></script>
+		<script type="text/javascript" src="{{url_for('static', filename='assets/js/main.js')}}"></script>
 
 	</body>
 </html>
