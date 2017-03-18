@@ -98,3 +98,17 @@
 	});
 
 })(jQuery);
+
+// $(document).ready(function () {
+// 	$("#formsubmit").submit( function () {
+//     $("#append").append("<p>Thank you for registering!</p>");
+// 	});
+// });
+
+$("#formsubmit").bind('ajax:complete', function() {
+    $("#append").append("<p>Thank you for registering!</p>");
+	});
+
+	// $("input").click( function () {
+	// 	alert("fuck me");
+	// });

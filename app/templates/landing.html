@@ -1,41 +1,17 @@
-<!DOCTYPE HTML>
-<!--
-	Alpha by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Campus Rep</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/main.css') }}">
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
-		<div id="page-wrapper">
+{% extends "basenew.html" %}
 
-			<!-- Header -->
-				<header id="header">
-					<h1><a href="index.html">Campus</a> Rep</h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#" class="button">Sign Up</a></li>
-						</ul>
-					</nav>
-				</header>
 
+{% block page_content %}
 			<!-- Main -->
 			<h2 id='landheader'> Your Campus is a Special Place. Help a Company Understand That.</h2>
+
 			<div class='flex-container'>
 				<div class="flex-item">
 					<img id="landpic" src="{{ url_for('static', filename='images/students.jpg') }}">
 				</div>
 					<div class="box landing">
 						<h3> <center> Be Notified When We Launch </center> </h3>
-						<form method="post" action="#">
+						<form id="formsubmit" method="post" action="{{ url_for('main.landing') }}">
 							<div class="row uniform 50%">
 								<div class="6u 12u(mobilep)">
 									<input type="text" name="name" id="name" value="" placeholder="Name" />
@@ -52,6 +28,7 @@
 								</div>
 							</div>
 						</form>
+						<div id="append"> </div>
 						<p> Stay up to date with the latest developments from Campus Rep,
 						your new source of engaging campus jobs</p>
 					</div>
@@ -60,6 +37,8 @@
 					</div>
 
 			</div>
+
+
 
 			<!-- Footer -->
 				<footer id="footer">
@@ -76,7 +55,8 @@
 					</ul>
 				</footer>
 
-		</div>
+{% endblock %}
+
 
 		<!-- Scripts -->
 		<script type="text/javascript" src="{{url_for('static', filename='assets/js/jquery.min.js')}}"></script>
@@ -85,6 +65,3 @@
 		<script type="text/javascript" src="{{url_for('static', filename='assets/js/skel.min.js')}}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='assets/js/util.js')}}"></script>
 		<script type="text/javascript" src="{{url_for('static', filename='assets/js/main.js')}}"></script>
-
-	</body>
-</html>

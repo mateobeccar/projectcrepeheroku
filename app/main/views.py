@@ -34,7 +34,9 @@ def server_shutdown():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    flash("fuck off ya kike")
+    return redirect(url_for('main.landing'))
+    #return render_template('index.html')
 
 
 @main.route('/landing', methods=['GET', 'POST'])
