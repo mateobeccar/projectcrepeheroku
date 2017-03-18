@@ -2808,6 +2808,7 @@
 		top: 0;
 		width: 100%;
 		z-index: 10000;
+		margin-bottom: 5%;
 	}
 
 		#header h1 {
@@ -3377,7 +3378,7 @@
 		/* Header */
 
 			#page-wrapper {
-				padding-top: 0;
+				padding-top: 100px;
 			}
 
 			#header {
@@ -3826,13 +3827,17 @@ height:580px;
 }
 
 #landheader {
-	margin-top: 5%;
 	margin-left: 2%;
 	color: #000000;
 	font-size: 48px;
 	font-weight: 500;
+	margin-top: 5%;
 }
 
 #append {
 	color: #ff2631;
+}
+
+.page-header {
+	margin-top: 5%;
 }

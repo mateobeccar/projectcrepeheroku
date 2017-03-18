@@ -34,13 +34,14 @@ def server_shutdown():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    flash("fuck off ya kike")
-    return redirect(url_for('main.landing'))
-    #return render_template('index.html')
+    return render_template('index.html')
 
 
 @main.route('/landing', methods=['GET', 'POST'])
 def landing():
+    if request.method == "POST":
+        flash("Thank you! We'll reach out to you when it's ready")
+        return redirect(url_for('main.landing'))
     return render_template('landing.html')
 
 
