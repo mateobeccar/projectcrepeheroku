@@ -78,7 +78,7 @@
 		// to revert it back to normal styling once the user scrolls past the banner.
 		// Note: This is disabled on mobile devices.
 			if (!skel.vars.mobile
-			&&	$header.hasClass('alt')
+			//&&	$header.hasClass('alt')
 			&&	$banner.length > 0) {
 
 				$window.on('load', function() {
