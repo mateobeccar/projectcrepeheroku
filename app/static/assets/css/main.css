@@ -1950,7 +1950,7 @@
 		font-style: italic;
 	}
 
-	header h2 + p {
+	 h2 + p {
 		font-size: 1.25em;
 		margin-top: -1em;
 		line-height: 1.5em;
@@ -2927,7 +2927,7 @@
 			animation: reveal-header 0.5s;
 		}
 
-		#header.alt {
+		/*#header.alt {
 			-moz-animation: none;
 			-webkit-animation: none;
 			-ms-animation: none;
@@ -2935,7 +2935,7 @@
 			background: none;
 			color: rgba(255, 255, 255, 0.75);
 			position: absolute;
-		}
+		}*/
 
 			#header.alt nav > ul > li a:not(.button).icon:before {
 				color: rgba(255, 255, 255, 0.75);
