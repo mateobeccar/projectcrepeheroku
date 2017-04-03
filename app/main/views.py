@@ -36,6 +36,10 @@ def server_shutdown():
 def index():
     return render_template('index.html')
 
+@main.route('/companies', methods=['GET', 'POST'])
+def companies():
+    return render_template('companies_homepage.html')
+
 
 @main.route('/landing', methods=['GET', 'POST'])
 def landing():
@@ -49,6 +53,19 @@ def landing():
         flash("Thank you! We'll reach out to you when the site is ready")
         return redirect(url_for('main.landing'))
     return render_template('landing.html')
+
+@main.route('/companies_landing', methods=['GET', 'POST'])
+def companies_landing():
+    if request.method == "POST":
+        email = request.form.get("email")
+        name = request.form.get("name")
+        user = User(email=email,
+                      name=name)
+        db.session.add(user)
+        db.session.commit()
+        flash("Thank you! We'll reach out to you when the site is ready")
+        return redirect(url_for('main.companies_landing'))
+    return render_template('companies_landing.html')
 
 
 @main.route('/user/<username>')
