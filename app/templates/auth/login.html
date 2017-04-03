@@ -1,16 +1,37 @@
-{% extends "base.html" %}
+{% extends "basenew.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky - Login{% endblock %}
+{% block title %}CampusConnect - Login{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Login</h1>
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+  <section id="main" class="container">
+
+    <section class="box special">
+    <div class="page-header">
+        <center><h2>Login</h2><center>
+    </div>
+    <form id="formsubmit" method="post" action="{{ url_for('auth.login') }}" onsubmit="return checkform(this)">
+        <div class="12u(mobilep)">
+          <ul class="actions align-center">
+          <li><input type="text" name="name" id="email" value="" placeholder="Email" required/></li>
+        </ul>
+        </div>
+        <div class="12u 12u(mobilep)">
+          <ul class="actions align-center">
+        <li>  <input type="password" name="password" id="password" value="" placeholder="Password" required/> </li>
+        </ul>
+        </div>
+      <div class="row uniform">
+        <div class="12u">
+          <ul class="actions align-center">
+            <li><input type="submit" id="signup" value="Login" /></li>
+          </ul>
+        </div>
+      </div>
+    </form>
     <br>
     <p>Forgot your password? <a href="{{ url_for('auth.password_reset_request') }}">Click here to reset it</a>.</p>
     <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
-</div>
+</section>
+</section>
 {% endblock %}

@@ -40,11 +40,12 @@ def index():
 @main.route('/landing', methods=['GET', 'POST'])
 def landing():
     if request.method == "POST":
-        # email = request.form.get("email")
-        # name = request.form.get("name")
-        # user = User(email=email,
-        #              name=name)
-        # db.session.add(user)
+        email = request.form.get("email")
+        name = request.form.get("name")
+        user = User(email=email,
+                      name=name)
+        db.session.add(user)
+        db.session.commit()
         flash("Thank you! We'll reach out to you when the site is ready")
         return redirect(url_for('main.landing'))
     return render_template('landing.html')

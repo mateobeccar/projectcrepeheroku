@@ -1,13 +1,35 @@
-{% extends "base.html" %}
+{% extends "basenew.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky - Register{% endblock %}
+{% block title %}CampusConnect - Register{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Register</h1>
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-</div>
+
+<section id="main" class="container">
+
+  <section class="box special">
+  <div class="page-header">
+      <center><h2>Register</h2><center>
+  </div>
+  <form id="formsubmit" method="post" action="{{ url_for('auth.register') }}" onsubmit="return checkform(this)">
+      <div class="12u(mobilep)">
+        <ul class="actions align-center">
+        <li><input type="text" name="name" id="email" value="" placeholder="Email" required/></li>
+      </ul>
+      </div>
+      <div class="12u 12u(mobilep)">
+        <ul class="actions align-center">
+      <li>  <input type="password" name="password" id="password" value="" placeholder="Password" required/> </li>
+      </ul>
+      </div>
+    <div class="row uniform">
+      <div class="12u">
+        <ul class="actions align-center">
+          <li><input type="submit" id="signup" value="Sign Up" /></li>
+        </ul>
+      </div>
+    </div>
+  </form>
+</section>
+</section>
 {% endblock %}
