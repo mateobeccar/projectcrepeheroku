@@ -60,6 +60,7 @@ class Follow(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)

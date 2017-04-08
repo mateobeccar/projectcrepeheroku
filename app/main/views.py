@@ -52,7 +52,7 @@ def landing():
         db.session.commit()
         flash("Thank you! We'll reach out to you when the site is ready")
         return redirect(url_for('main.landing'))
-    return render_template('landing.html')
+    return render_template('landing.html', user=user)
 
 @main.route('/companies_landing', methods=['GET', 'POST'])
 def companies_landing():
@@ -75,9 +75,7 @@ def user(username):
     pagination = user.posts.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
-    posts = pagination.items
-    return render_template('user.html', user=user, posts=posts,
-                           pagination=pagination)
+    return render_template('usernew.html', user=user)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -92,8 +90,8 @@ def edit_profile():
         flash('Your profile has been updated.')
         return redirect(url_for('.user', username=current_user.username))
     form.name.data = current_user.name
-    form.location.data = current_user.location
-    form.about_me.data = current_user.about_me
+#    form.location.data = current_user.location
+    #form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', form=form)
 
 

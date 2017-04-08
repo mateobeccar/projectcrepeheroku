@@ -1,9 +1,4 @@
 {% extends "bootstrap/base.html" %}
-<!--
-	Alpha by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 
 {% block head %}
 {{ super() }}
@@ -22,6 +17,9 @@
 			<nav id="nav">
 				<ul>
 					<li><a href="{{ url_for('main.index')}}">Home</a></li>
+					{% if current_user.is_authenticated %}
+					<li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
+					{% endif %}
 					<li><a href="{{ url_for('auth.register')}}" class="button">Sign Up</a></li>
 				</ul>
 			</nav>
@@ -40,4 +38,5 @@
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/skel.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/util.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='assets/js/main.js')}}"></script>
+{{ moment.include_moment() }}
 {% endblock %}
