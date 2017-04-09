@@ -51,6 +51,7 @@ def landing():
         db.session.add(user)
         db.session.commit()
         flash("Thank you! We'll reach out to you when the site is ready")
+        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
         return redirect(url_for('main.landing'))
     return render_template('landing.html')
 
@@ -63,6 +64,7 @@ def companies_landing():
                       name=name)
         db.session.add(user)
         db.session.commit()
+        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
         flash("Thank you! We'll reach out to you when the site is ready")
         return redirect(url_for('main.companies_landing'))
     return render_template('companies_landing.html')

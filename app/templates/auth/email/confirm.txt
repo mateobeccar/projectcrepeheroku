@@ -1,13 +1,11 @@
 Dear {{ user.username }},
 
-Welcome to Flasky!
+Welcome to Campus Connect!
 
-To confirm your account please click on the following link:
-
-{{ url_for('auth.confirm', token=token, _external=True) }}
+Thank you for registering a student account on Campus Connect. Our students earn income and more as campus representatives for some of the best brands and companies in the world. Begin searching for jobs on the Campus Connect platform.
 
 Sincerely,
 
-The Flasky Team
+The Campus Connect Team
 
 Note: replies to this email address are not monitored.
