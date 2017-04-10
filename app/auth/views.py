@@ -56,6 +56,9 @@ def register():
                       password=password)
         db.session.add(user)
         db.session.commit()
+
+        #email
+        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html')
 
