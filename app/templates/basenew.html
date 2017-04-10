@@ -27,11 +27,20 @@ ga('send', 'pageview');
 			<h1><a href="#">Campus</a> Connect</h1>
 			<nav id="nav">
 				<ul>
-					<li><a href="{{ url_for('main.index')}}">Home</a></li>
+					<li><a href="{{ url_for('main.index')}}">Students</a></li>
+					<li><a href="{{ url_for('main.companies')}}">Companies</a></li>
+					<li><a href="{{ url_for('main.team')}}">Team</a></li>
+					<li><a href="http://nameless-oasis-91905.herokuapp.com">Blog</a></li>
+					
 					{% if current_user.is_authenticated %}
-					<li><a href="{{ url_for('main.user', email=current_user.email) }}">Profile</a></li>
+						<li><a href="{{ url_for('main.user', email=current_user.email) }}">Profile</a></li>
+						<li><a href="{{ url_for('main.user', email=current_user.email) }}">Home</a></li>
+						<li><a href="{{ url_for('main.user', email=current_user.email) }}">Sign out</a></li>
+					{% else %}
+						<li><a href="{{ url_for('auth.login')}}" class="button">Sign in</a></li>
+						<li><a href="{{ url_for('auth.register')}}" class="button">Sign Up</a></li>
 					{% endif %}
-					<li><a href="{{ url_for('auth.register')}}" class="button">Sign Up</a></li>
+					
 				</ul>
 			</nav>
 		</header>

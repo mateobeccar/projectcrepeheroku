@@ -36,6 +36,10 @@ def server_shutdown():
 def index():
     return render_template('index.html')
 
+@main.route('/team')
+def team():
+    return render_template('team.html')
+
 @main.route('/companies', methods=['GET', 'POST'])
 def companies():
     return render_template('companies_homepage.html')
