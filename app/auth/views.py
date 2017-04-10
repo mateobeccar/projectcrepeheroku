@@ -51,15 +51,25 @@ def logout():
 def register():
     if request.method == "POST":
         email = request.form.get("email")
+        user = User.query.filter_by(email=email).first()
+        username = request.form.get("username")
         password = request.form.get("password")
-        user = User(email=email,
-                      password=password)
-        db.session.add(user)
-        db.session.commit()
+        password2 = request.form.get("password2")
+        if password != password2:
+            flash("Passwords don't match")
+            redirect(url_for('auth.register'))
+        elif user is not None:
+            flash("Email or username already in use")
+            redirect(url_for('auth.register'))
+        if user is None and password == password2:
+            user = User(email=email, username=username, password=password)
+            db.session.add(user)
+            db.session.commit()
+            send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
+            return redirect(url_for('auth.login'))
+
 
         #email
-        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
-        return redirect(url_for('auth.login'))
     return render_template('auth/register.html')
 
 
