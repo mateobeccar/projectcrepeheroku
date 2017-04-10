@@ -1,0 +1,50 @@
+{% extends "basenew.html" %}
+
+{% block page_content %}
+	<body class="landing">
+		<div id="page-wrapper">
+
+
+		<!-- Main -->
+				<section id="main" class="container">
+
+					<section class="box special">
+						<header class="major">
+							<h2> We offer students easy access to flexible
+							<br />
+							opportunities on their campuses.
+							</h2>
+							<p>
+							Students who value flexibility and looking for extra income can sign up to be
+							 <br />
+							campus representatives completing tasks for brands and companies.</p>
+						</header>
+					</section>
+
+				<table width="100%">
+					<tr>
+					<td><img src="{{ url_for('static', filename='images/dan.jpeg') }}" alt = ""></td>
+					<td><p align="center"><img src="{{ url_for('static', filename='images/JB.png') }}" alt = ""></td>
+					<td align="right"><img src="{{ url_for('static', filename='images/mateo.jpg') }}" alt = ""></td>
+				</tr>
+
+
+
+		<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; CampusRep. All rights reserved.</li>
+					</ul>
+				</footer>
+		</div>
+	</body>
+
+{% endblock %}

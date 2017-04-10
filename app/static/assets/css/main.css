@@ -3841,3 +3841,21 @@ height:580px;
 .page-header {
 	margin-top: 5%;
 }
+
+/*user additions*/
+
+.team div{
+    text-align: justify;
+}
+
+.team div img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+
+#team div:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
