@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}Flasky - {{ user.username }}{% endblock %}
+{% block title %}Campus Connect - {{ user.username }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
+  <section class="box">
     <div class="profile-header">
-        {% if user.name or user.location %}
+        <h2>
+          {% if user.name %}
+          {{ user.name }}
+          {% else %}
+          {{ user.username }}
+          {% endif %} </h2>
+          {% if user.name or user.location %}
         <p>
-          <h1>{{ user.username }}</h1>
-            {% if user.name %}{{ user.name }}<br>{% endif %}
+            <!-- {% if user.name %}{{ user.name }}<br>{% endif %} -->
             {% if user.location %}
                 From <a href="http://maps.google.com/?q={{ user.location }}">{{ user.location }}</a><br>
             {% endif %}
@@ -29,8 +35,10 @@
                 <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-default">Unfollow</a>
                 {% endif %}
             {% endif %}
-            <a href="{{ url_for('.followers', username=user.username) }}">Followers: <span class="badge">{{ user.followers.count() - 1 }}</span></a>
-            <a href="{{ url_for('.followed_by', username=user.username) }}">Following: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
+            <a href="{{ url_for('.followers', username=user.username) }}">University: <span class="badge">{{ user.followers.count() - 1 }}</span></a>
+            </p>
+          </p>
+            <a href="{{ url_for('.followed_by', username=user.username) }}">Year: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
             {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
             | <span class="label label-default">Follows you</span>
             {% endif %}
@@ -44,12 +52,25 @@
             {% endif %}
         </p>
     </div>
+  </section>
 </div>
-<h3>Posts by {{ user.username }}</h3>
+<h2>Jobs done by
+{% if user.name %}
+{{ user.name }}
+{% else %}
+{{ user.username }}
+{% endif %} </h2>
 {% include '_posts.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
+{% if user.jobs_done %}
+  {% if pagination %}
+    <div class="pagination">
+      {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
+    </div>
+  {% endif %}
+{% else %}
+<div>
+<h3> No jobs completed yet <h3>
 </div>
 {% endif %}
+
 {% endblock %}

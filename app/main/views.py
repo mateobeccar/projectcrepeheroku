@@ -34,54 +34,39 @@ def server_shutdown():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
-
-@main.route('/team')
-def team():
-    return render_template('team.html')
-
-@main.route('/companies', methods=['GET', 'POST'])
-def companies():
-    return render_template('companies_homepage.html')
-
-
-@main.route('/landing', methods=['GET', 'POST'])
-def landing():
-    if request.method == "POST":
-        email = request.form.get("email")
-        name = request.form.get("name")
-        user = User(email=email,
-                      name=name)
-        db.session.add(user)
-        db.session.commit()
-        flash("Thank you! We'll reach out to you when the site is ready")
-        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
-        return redirect(url_for('main.landing'))
-    return render_template('landing.html')
-
-@main.route('/companies_landing', methods=['GET', 'POST'])
-def companies_landing():
-    if request.method == "POST":
-        email = request.form.get("email")
-        name = request.form.get("name")
-        user = User(email=email,
-                      name=name)
-        db.session.add(user)
-        db.session.commit()
-        send_email(user.email, 'Welcome to CampusConnect!', 'auth/email/confirm', user=user)
-        flash("Thank you! We'll reach out to you when the site is ready")
-        return redirect(url_for('main.companies_landing'))
-    return render_template('companies_landing.html')
+    form = PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and \
+            form.validate_on_submit():
+        post = Post(body=form.body.data,
+                    author=current_user._get_current_object())
+        db.session.add(post)
+        return redirect(url_for('.index'))
+    page = request.args.get('page', 1, type=int)
+    show_followed = False
+    if current_user.is_authenticated:
+        show_followed = bool(request.cookies.get('show_followed', ''))
+    if show_followed:
+        query = current_user.followed_posts
+    else:
+        query = Post.query
+    pagination = query.order_by(Post.timestamp.desc()).paginate(
+        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+        error_out=False)
+    posts = pagination.items
+    return render_template('index.html', form=form, posts=posts,
+                           show_followed=show_followed, pagination=pagination)
 
 
-@main.route('/user/<email>')
-def user(email):
-    user = User.query.filter_by(email=email).first_or_404()
+@main.route('/user/<username>')
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     pagination = user.posts.order_by(Post.timestamp.desc()).paginate(
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
-    return render_template('usernew.html', user=user)
+    posts = pagination.items
+    return render_template('user.html', user=user, posts=posts,
+                           pagination=pagination)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])

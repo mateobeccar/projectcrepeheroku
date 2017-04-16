@@ -3,7 +3,7 @@
 }
 .profile-header {
     min-height: 260px;
-    margin-left: 280px;
+    /*margin-left: 280px;*/
 }
 div.post-tabs {
     margin-top: 16px;
@@ -104,4 +104,14 @@ div.flask-pagedown-preview h3 {
 }
 .table.followers tr {
     border-bottom: 1px solid #e0e0e0;
+}
+
+#loginform.col-sm-6 {
+  float: none;
+  margin:0 auto;
+}
+
+.profile-header p {
+  font-size: 18px;
+  font-weight: 500;
 }

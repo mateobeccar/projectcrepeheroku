@@ -1,4 +1,4 @@
-#!/Users/mateobeccar/flasky/venv/bin/python
+#!/Users/mateobeccar/Documents/startup-code-timber-equinox/venv/bin/python
 
 import sys
 import getopt

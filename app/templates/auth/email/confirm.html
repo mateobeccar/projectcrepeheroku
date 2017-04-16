@@ -1,6 +1,8 @@
 <p>Dear {{ user.username }},</p>
-<p>Welcome to <b>Campus Connect</b>!</p>
-<p>Thank you for registering a student account on Campus Connect. Our students earn income and more as campus representatives for some of the best brands and companies in the world. Begin searching for jobs on the <a href="projectcrepe.herokuapp.com">Campus Connect platform</a>.</p>
+<p>Welcome to <b>Flasky</b>!</p>
+<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">click here</a>.</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
 <p>Sincerely,</p>
-<p>The Campus Connect Team</p>
+<p>The Flasky Team</p>
 <p><small>Note: replies to this email address are not monitored.</small></p>
