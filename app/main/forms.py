@@ -14,7 +14,13 @@ class NameForm(Form):
 
 class EditProfileForm(Form):
     name = StringField('Real name', validators=[Length(0, 64)])
-    location = StringField('University', validators=[Length(0, 64)])
+    university = SelectField(
+        'University',
+        choices=[('',''), ('Yale University', 'Yale University'), ('Harvard University', 'Harvard University'),
+        ('Princeton University', 'Princeton University')])
+    year = SelectField(
+        'Year',
+        choices=[('',''), ('Freshman', 'Freshman'), ('Sophomore', 'Sophomore'), ('Junior', 'Junior'), ('Senior', 'Senior')])
     about_me = TextAreaField('Qualifications or link to resume')
     submit = SubmitField('Submit')
 

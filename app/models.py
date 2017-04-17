@@ -73,6 +73,7 @@ class User(UserMixin, db.Model):
     university = db.Column(db.String(64))
     year = db.Column(db.String(64))
     about_me = db.Column(db.Text())
+    company = db.Column(db.Boolean, default=False)
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     avatar_hash = db.Column(db.String(32))

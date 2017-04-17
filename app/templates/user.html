@@ -12,6 +12,7 @@
           {{ user.name }}
           {% else %}
           {{ user.username }}
+          <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add Real Name</a>
           {% endif %} </h2>
           {% if user.name or user.location %}
         <p>
@@ -35,18 +36,21 @@
                 <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-default">Unfollow</a>
                 {% endif %}
             {% endif %}
-            <a href="{{ url_for('.followers', username=user.username) }}">University: <span class="badge">{{ user.followers.count() - 1 }}</span></a>
             </p>
+            <p>
+            <b>University:</b> {% if not user.university %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add University</a>
+            {% else %} {{ user.university}}{% endif %}</p>
+            <p><b>Year:</b> {% if not user.year %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add Year</a>
+            {% else %} {{ user.year}}{% endif %}
           </p>
-            <a href="{{ url_for('.followed_by', username=user.username) }}">Year: <span class="badge">{{ user.followed.count() - 1 }}</span></a>
             {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
             | <span class="label label-default">Follows you</span>
             {% endif %}
         </p>
         <p>
-            {% if user == current_user %}
+            <!-- {% if user == current_user %}
             <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
-            {% endif %}
+            {% endif %} -->
             {% if current_user.is_administrator() %}
             <a class="btn btn-danger" href="{{ url_for('.edit_profile_admin', id=user.id) }}">Edit Profile [Admin]</a>
             {% endif %}
@@ -68,7 +72,7 @@
     </div>
   {% endif %}
 {% else %}
-<div>
+<div id="textspacing">
 <h3> No jobs completed yet <h3>
 </div>
 {% endif %}
