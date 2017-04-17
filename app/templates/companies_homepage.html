@@ -1,9 +1,8 @@
-{% extends "basenew.html" %}
+{% extends "base.html" %}
 
-{% block page_content %}
+{% block content %}
 	<body class="landing">
-		<div id="page-wrapper">
-
+			<div id="page-wrapper">
 			<!-- Banner -->
 				<section id="banner">
 					<h2>Campus Connect</h2>
@@ -19,15 +18,15 @@
 
 					<section class="box special">
 						<header class="major">
-							<h2> We offer students easy access to flexible
+							<h2> We offer companies easy access to college campuses
 							<br />
 
-							opportunities on their campuses.
+							through our campus representatives.
 							</h2>
 							<p>
-							Students who value flexibility and looking for extra income can sign up to be
+							Companies looking to expand their web in an effective and low-cost manner can use
 							 <br />
-							campus representatives completing tasks for brands and companies.</p>
+							our campus representative platform to advertise directly on college campuses.</p>
 						</header>
 						<span class="image featured"><img src="{{ url_for('static', filename='images/flyers.jpg') }}" alt="" /></span>
 					</section>
@@ -42,19 +41,19 @@
 							<section>
 								<span class="icon major fa-area-chart accent3"></span>
 								<h3>Step 2</h3>
-								<p>Search our jobs to find your best matches.</p>
+								<p>Create a campus job and wait for applications.</p>
 							</section>
 						</div>
 						<div class="features-row">
 							<section>
 								<span class="icon major fa-cloud accent4"></span>
 								<h3>Step 3</h3>
-								<p>Apply to jobs using our platform.</p>
+								<p>Pay representatives per task completed, insuring reliability.</p>
 							</section>
 							<section>
 								<span class="icon major fa-lock accent5"></span>
 								<h3>Step 4</h3>
-								<p>Make money by completing simple tasks</p>
+								<p>Build your brand and increase your user web quickly on college campuses.</p>
 							</section>
 						</div>
 					</section>
@@ -107,7 +106,21 @@
 
 				</section>
 
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Campus Connect. All rights reserved.</li>
+					</ul>
+				</footer>
+
 		</div>
 	</body>
-
 {% endblock %}

@@ -57,6 +57,18 @@ def index():
                            show_followed=show_followed, pagination=pagination)
 
 
+@main.route('/company_homepage')
+def company_homepage():
+    return render_template('companies_homepage.html')
+
+@main.route('/student_homepage')
+def student_homepage():
+    return render_template('student_homepage.html')
+
+@main.route('/team')
+def team():
+    return render_template('team.html')
+
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()

@@ -3,6 +3,13 @@
 {% block title %}CampusConnect{% endblock %}
 
 {% block head %}
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-97046630-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -33,11 +40,15 @@
                     <li><a href="{{ url_for('main.user', username=current_user.username) }}">Profile</a></li>
                   {% endif %}
                 {% endif %}
+                <li><a href="http://nameless-oasis-91905.herokuapp.com">Blog</a></li>
+                <li><a href="{{ url_for('main.team', username=current_user.username) }}">Team</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.can(Permission.MODERATE_COMMENTS) %}
                 <li><a href="{{ url_for('main.moderate') }}">Moderate Comments</a></li>
                 {% endif %}
+                <li><a href="{{ url_for('main.student_homepage') }}">Students</a></li>
+                <li><a href="{{ url_for('main.company_homepage') }}">Companies</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -70,6 +81,7 @@
 {% block content %}
 <div class="container">
     {% for message in get_flashed_messages() %}
+    <br>
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{ message }}
