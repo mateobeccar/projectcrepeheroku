@@ -17,7 +17,8 @@
 </div>
 <section class="box">
 <div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+    {% if current_user.company %}
+    <h4> <u>Post a Job Below </u></h4>
     {{ wtf.quick_form(form) }}
     {% endif %}
 </div>

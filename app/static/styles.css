@@ -124,3 +124,8 @@ div.flask-pagedown-preview h3 {
   margin-top: 25px;
   margin-bottom: 50px;
 }
+
+input[type=checkbox]
+{
+  -webkit-appearance:checkbox;
+}
