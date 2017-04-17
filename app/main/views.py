@@ -4,9 +4,9 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm, EditCompanyProfileForm
+    CommentForm, EditCompanyProfileForm, ApplicantForm
 from .. import db
-from ..models import Permission, Role, User, Post, Comment
+from ..models import Permission, Role, User, Post, Comment, Application
 from ..decorators import admin_required, permission_required
 
 
@@ -69,6 +69,21 @@ def student_homepage():
 def team():
     return render_template('team.html')
 
+@main.route('/apply/<int:id>', methods=['GET', 'POST'])
+@login_required
+def apply(id):
+    post = Post.query.get_or_404(id)
+    if current_user == post.author:
+        abort(403)
+    form = ApplicantForm()
+    if form.validate_on_submit():
+        app = Application(applicant_id=current_user.id,
+                          post_id=id)
+        db.session.add(app)
+        flash('Applied for this job')
+        return redirect(url_for('.post', id=post.id))
+    return render_template('apply.html', posts=[post], form=form)
+
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
@@ -88,8 +103,9 @@ def company(username):
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
     posts = pagination.items
-    return render_template('company-profile.html', user=user, posts=posts,
-                           pagination=pagination)
+    apps = Application.query.all()
+    return render_template('company-profile.html', user=user, posts=posts, apps=apps,
+                          pagination=pagination)
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -175,7 +191,7 @@ def post(id):
         page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
-    return render_template('post.html', posts=[post], form=form,
+    return render_template('post.html', post=post, posts=[post], form=form,
                            comments=comments, pagination=pagination)
 
 

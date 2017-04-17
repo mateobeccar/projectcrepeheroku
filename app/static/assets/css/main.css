@@ -3863,3 +3863,7 @@ height:580px;
 .navbar.navbar-inverse {
 	margin-bottom: 0px;
 }
+
+#view{
+	font-size: 100%;
+}

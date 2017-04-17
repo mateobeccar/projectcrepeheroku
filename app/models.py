@@ -80,6 +80,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     avatar_hash = db.Column(db.String(32))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    applications = db.relationship('Application', backref='applicant', lazy='dynamic')
     followed = db.relationship('Follow',
                                foreign_keys=[Follow.follower_id],
                                backref=db.backref('follower', lazy='joined'),
@@ -297,7 +298,10 @@ class Post(db.Model):
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    applicant_id = db.Column(db.Integer)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    applications = db.relationship('Application', backref='post', lazy='dynamic')
+
 
     @staticmethod
     def generate_fake(count=100):
@@ -347,6 +351,13 @@ class Post(db.Model):
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)
 
+class Application(db.Model):
+    __tablename__ = 'applications'
+    id = db.Column(db.Integer, primary_key=True)
+    why = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    applicant_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
 class Comment(db.Model):
     __tablename__ = 'comments'

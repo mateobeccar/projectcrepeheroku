@@ -66,9 +66,16 @@ class EditProfileAdminForm(Form):
 class PostForm(Form):
     title = StringField("Title", validators=[Required()])
     body = PageDownField("Job", validators=[Required()])
-    submit = SubmitField('Submit')
+    university = SelectField(
+        'University',
+        choices=[('',''), ('Yale University', 'Yale University'), ('Harvard University', 'Harvard University'),
+        ('Princeton University', 'Princeton University')])
+    submit = SubmitField('Publish')
 
+class ApplicantForm(Form):
+    why = TextAreaField("The company will receive your profile. Is there any further information about yourself you'd like them to know to be considered for this job?")
+    submit = SubmitField('Apply')
 
 class CommentForm(Form):
-    body = StringField('Enter your comment', validators=[Required()])
-    submit = SubmitField('Submit')
+    body = StringField('Enter your message', validators=[Required()])
+    submit = SubmitField('Send')

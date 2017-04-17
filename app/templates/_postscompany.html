@@ -1,3 +1,4 @@
+
 <ul class="posts">
     {% for post in posts %}
     <li class="post">
@@ -21,6 +22,19 @@
                     {{ post.body }}
                 {% endif %}
             </div>
+            <ul>
+              <h4> Applicants </h4>
+            {% for app in apps %}
+            {% if post.id == app.post_id %}
+            <a href="{{ url_for('main.user', username=app.applicant.username) }}">
+            <li>{% if app.applicant.name %}
+          {{ app.applicant.name }}
+            {% else %}
+            {{ app.applicant.username }}
+            {% endif %}</li> </a>
+              {% endif %}
+            {% endfor %}
+          </ul>
             <div class="post-footer">
                 {% if current_user == post.author %}
                 <a href="{{ url_for('.edit', id=post.id) }}">
@@ -31,6 +45,7 @@
                     <span class="label label-danger">Edit [Admin]</span>
                 </a>
                 {% endif %}
+
                 {% if not current_user.company %}
                 <a href="{{ url_for('.apply', id=post.id) }}">
                     <span class="label label-info" id="view">Apply</span>
@@ -40,6 +55,7 @@
                     <span class="label label-primary" id="view">View</span>
                 </a>
             </div>
+
         </div>
     </li>
     {% endfor %}

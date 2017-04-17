@@ -27,13 +27,6 @@
         {% endif %}
         {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
         <p>
-            {% if current_user.can(Permission.FOLLOW) and user != current_user %}
-                {% if not current_user.is_following(user) %}
-                <a href="{{ url_for('.follow', username=user.username) }}" class="btn btn-primary">Follow</a>
-                {% else %}
-                <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-default">Unfollow</a>
-                {% endif %}
-            {% endif %}
             </p>
             <p>
             <b>University:</b> {% if not user.university %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add University</a>

@@ -12,7 +12,7 @@
           {{ user.name }}
           {% else %}
           {{ user.username }}
-          <a class="btn btn-default" href="{{ url_for('.edit_company_profile') }}"> Add Real Name</a>
+          <a class="btn btn-default" href="{{ url_for('.edit_company_profile') }}"> Add Company Name</a>
           {% endif %} </h2>
           {% if user.name or user.location %}
         <p>
@@ -53,23 +53,19 @@
     </div>
   </section>
 </div>
-<h2>Jobs posted by
-{% if user.name %}
-{{ user.name }}
+<h2>Manage My Jobs
+</h2>
+{% if posts %}
+  {% include '_postscompany.html' %}
+    {% if pagination %}
+      <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
+      </div>
+    {% endif %}
 {% else %}
-{{ user.username }}
-{% endif %} </h2>
-{% include '_posts.html' %}
-{% if user.jobs_done %}
-  {% if pagination %}
-    <div class="pagination">
-      {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
-    </div>
-  {% endif %}
-{% else %}
-<div id="textspacing">
-<h3> No jobs completed yet <h3>
-</div>
+  <div id="textspacing">
+    <h3> No jobs completed yet </h3>
+  </div>
 {% endif %}
 
 {% endblock %}
