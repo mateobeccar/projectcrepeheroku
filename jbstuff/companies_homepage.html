@@ -1,0 +1,126 @@
+{% extends "basenew.html" %}
+
+{% block page_content %}
+	<body class="landing">
+			<div id="page-wrapper">
+			<!-- Banner -->
+				<section id="banner">
+					<h2>Campus Connect</h2>
+					<p>The one-stop-shop for all your on campus brand promotion needs</p>
+					<ul class="actions">
+						<li><a href="{{ url_for('auth.register') }}" class="button special" >Sign Up</a></li>
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container">
+
+					<section class="box special">
+						<header class="major">
+							<h2> We offer companies easy access to college campuses
+							<br />
+
+							through our campus representatives.
+							</h2>
+							<p>
+							Companies looking to expand their web in an effective and low-cost manner can use 
+							 <br />
+							our campus representative platform to advertise directly on college campuses.</p>
+						</header>
+						<span class="image featured"><img src="{{ url_for('static', filename='images/flyers.jpg') }}" alt="" /></span>
+					</section>
+
+					<section class="box special features">
+						<div class="features-row">
+							<section>
+								<span class="icon major fa-bolt accent2"></span>
+								<h3>Step 1</h3>
+								<p>Sign up for a free account.</p>
+							</section>
+							<section>
+								<span class="icon major fa-area-chart accent3"></span>
+								<h3>Step 2</h3>
+								<p>Create a campus job and wait for applications.</p>
+							</section>
+						</div>
+						<div class="features-row">
+							<section>
+								<span class="icon major fa-cloud accent4"></span>
+								<h3>Step 3</h3>
+								<p>Pay representatives per task completed, insuring reliability.</p>
+							</section>
+							<section>
+								<span class="icon major fa-lock accent5"></span>
+								<h3>Step 4</h3>
+								<p>Build your brand and increase your user web quickly on college campuses.</p>
+							</section>
+						</div>
+					</section>
+
+					<div class="row">
+						<div class="6u 12u(narrower)">
+
+							<section class="box special">
+								<span class="image featured"><img src="{{ url_for('static', filename='images/forstudents.jpg') }}" alt="" /></span>
+								<h3>For Students</h3>
+								<p>Let's face it, most campus jobs aren't great. They're really the bottom of the barrel. Why not work on your terms, doing something that builds real life skills?.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+
+						</div>
+						<div class="6u 12u(narrower)">
+
+							<section class="box special">
+								<span class="image featured"><img src="{{ url_for('static', filename='images/forcompanies.jpg') }}" alt="" /></span>
+								<h3>For Companies</h3>
+								<p>Company resources often can't be devoted to focusing on a vital yet elusive and cash-strapped demographic: college students. Let us worry about the outreach. </p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
+
+						</div>
+					</div>
+
+				</section>
+
+			<!-- CTA -->
+				<section id="cta">
+
+					<h2>Notify when beta is released</h2>
+					<p>Sign up to gain access and learn about the beta release.</p>
+
+					<form>
+						<div class="row uniform 50%">
+							<div class="8u 12u(mobilep)">
+								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="4u 12u(mobilep)">
+								<input type="submit" value="Sign Up" class="fit" />
+							</div>
+						</div>
+					</form>
+
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; CampusRep. All rights reserved.</li>
+					</ul>
+				</footer>
+
+		</div>
+	</body>
+{% endblock %}

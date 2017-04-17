@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm
+    CommentForm, EditCompanyProfileForm
 from .. import db
 from ..models import Permission, Role, User, Post, Comment
 from ..decorators import admin_required, permission_required
@@ -97,6 +97,24 @@ def edit_profile():
     form.year.data = current_user.year
     form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', form=form)
+
+@main.route('/edit-company-profile', methods=['GET', 'POST'])
+@login_required
+def edit_company_profile():
+    form = EditCompanyProfileForm()
+    if form.validate_on_submit():
+        current_user.name = form.name.data
+        current_user.industry = form.industry.data
+        current_user.website = form.website.data
+        current_user.about_me = form.about_me.data
+        db.session.add(current_user)
+        flash('Your profile has been updated.')
+        return redirect(url_for('.company', username=current_user.username))
+    form.name.data = current_user.name
+    form.industry.data = current_user.industry
+    form.website.data = current_user.website
+    form.about_me.data = current_user.about_me
+    return render_template('edit_company_profile.html', form=form)
 
 
 @main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])

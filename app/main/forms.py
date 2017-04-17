@@ -24,6 +24,13 @@ class EditProfileForm(Form):
     about_me = TextAreaField('Qualifications or link to resume')
     submit = SubmitField('Submit')
 
+class EditCompanyProfileForm(Form):
+    name = StringField('Company Name', validators=[Length(0, 64)])
+    industry = StringField('Industry', validators=[Length(0, 64)])
+    website = StringField('Website', validators=[Length(0, 64)])
+    about_me = TextAreaField('Company Description')
+    submit = SubmitField('Submit')
+
 
 class EditProfileAdminForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),

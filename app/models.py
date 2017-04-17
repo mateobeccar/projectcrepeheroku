@@ -71,6 +71,8 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=True)
     name = db.Column(db.String(64))
     university = db.Column(db.String(64))
+    industry = db.Column(db.String(64))
+    website = db.Column(db.String(64))
     year = db.Column(db.String(64))
     about_me = db.Column(db.Text())
     company = db.Column(db.Boolean, default=False)
