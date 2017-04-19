@@ -68,7 +68,7 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     done_job = db.Column(db.Boolean, default=False)
     password_hash = db.Column(db.String(128))
-    confirmed = db.Column(db.Boolean, default=True)
+    confirmed = db.Column(db.Boolean, default=False)
     name = db.Column(db.String(64))
     university = db.Column(db.String(64))
     industry = db.Column(db.String(64))
