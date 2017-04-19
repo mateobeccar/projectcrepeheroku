@@ -69,6 +69,7 @@ def student_homepage():
 def team():
     return render_template('team.html')
 
+
 @main.route('/apply/<int:id>', methods=['GET', 'POST'])
 @login_required
 def apply(id):
