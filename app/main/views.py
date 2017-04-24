@@ -35,9 +35,8 @@ def server_shutdown():
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
-    if current_user.can(Permission.WRITE_ARTICLES) and \
-            form.validate_on_submit():
-        post = Post(body=form.body.data,
+    if form.validate_on_submit():
+        post = Post(body=form.body.data, title=form.title.data,
                     author=current_user._get_current_object())
         db.session.add(post)
         return redirect(url_for('.index'))
@@ -69,21 +68,37 @@ def student_homepage():
 def team():
     return render_template('team.html')
 
-
 @main.route('/apply/<int:id>', methods=['GET', 'POST'])
 @login_required
 def apply(id):
     post = Post.query.get_or_404(id)
+    application = Application.query.filter_by(post_id=id).first()
     if current_user == post.author:
         abort(403)
     form = ApplicantForm()
     if form.validate_on_submit():
+        if application:
+            if not application.applicant_id == current_user.id:
+                app_count = post.applicant_count
+                app_count = int(app_count) + 1
+                post.applicant_count = app_count
+        elif not application:
+                app_count = post.applicant_count
+                app_count = int(app_count) + 1
+                post.applicant_count = app_count
         app = Application(applicant_id=current_user.id,
                           post_id=id)
         db.session.add(app)
         flash('Applied for this job')
         return redirect(url_for('.post', id=post.id))
     return render_template('apply.html', posts=[post], form=form)
+
+@main.route('/applicants/<int:id>', methods=['GET', 'POST'])
+@login_required
+def applicants(id):
+    post = Post.query.get_or_404(id)
+    apps = Application.query.filter_by(post_id=id)
+    return render_template('applicants.html', posts=[post], apps=apps)
 
 @main.route('/user/<username>')
 def user(username):

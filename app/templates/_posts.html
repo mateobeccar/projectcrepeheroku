@@ -16,8 +16,14 @@
             {% endif %}</a></div>
             <div class="post-body">
                 {% if post.body_html %}
+                    {% if post.title %}
+                        <u>{{ post.title }}</u>
+                      {% endif %}
                     {{ post.body_html | safe }}
                 {% else %}
+                {% if post.title %}
+                    <u>{{ post.title }}</u>
+                  {% endif %}
                     {{ post.body }}
                 {% endif %}
             </div>
