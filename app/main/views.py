@@ -72,7 +72,7 @@ def team():
 @login_required
 def apply(id):
     post = Post.query.get_or_404(id)
-    application = Application.query.filter_by(post_id=id).first()
+    application = Application.query.filter_by(post_id=id, applicant_id=current_user.id).first()
     if current_user == post.author:
         abort(403)
     form = ApplicantForm()
@@ -82,15 +82,23 @@ def apply(id):
                 app_count = post.applicant_count
                 app_count = int(app_count) + 1
                 post.applicant_count = app_count
-        elif not application:
+                app = Application(applicant_id=current_user.id,
+                                  post_id=id)
+                db.session.add(app)
+                flash('Applied for this job')
+                return redirect(url_for('.post', id=post.id))
+            elif application.applicant_id == current_user.id:
+                flash('You already applied for this job')
+                return redirect(url_for('.post', id=post.id))
+        else:
                 app_count = post.applicant_count
                 app_count = int(app_count) + 1
                 post.applicant_count = app_count
-        app = Application(applicant_id=current_user.id,
-                          post_id=id)
-        db.session.add(app)
-        flash('Applied for this job')
-        return redirect(url_for('.post', id=post.id))
+                app = Application(applicant_id=current_user.id,
+                                  post_id=id)
+                db.session.add(app)
+                flash('Applied for this job')
+                return redirect(url_for('.post', id=post.id))
     return render_template('apply.html', posts=[post], form=form)
 
 @main.route('/applicants/<int:id>', methods=['GET', 'POST'])
@@ -98,7 +106,38 @@ def apply(id):
 def applicants(id):
     post = Post.query.get_or_404(id)
     apps = Application.query.filter_by(post_id=id)
-    return render_template('applicants.html', posts=[post], apps=apps)
+    return render_template('applicants.html', post=
+    post, apps=apps)
+
+@main.route('/hired/<int:id>', methods=['GET', 'POST'])
+@login_required
+def hired(id):
+    post = Post.query.get_or_404(id)
+    apps = Application.query.filter_by(post_id=id)
+    return render_template('applicants.html', post=
+    post, apps=apps)
+
+@main.route('/approve/<int:id>/<int:applicant_id>', methods=['GET', 'POST'])
+def approve(id, applicant_id):
+    app = Application.query.filter_by(post_id=id, applicant_id=applicant_id).first()
+    post = Post.query.get_or_404(id)
+    app.approved = True
+    app_count = post.applicant_count
+    app_count = int(app_count) - 1
+    post.applicant_count = app_count
+    flash('Applicant ' + app.applicant.username + ' approved')
+    return redirect(url_for('.post', id=id))
+
+@main.route('/reject/<int:id>/<int:applicant_id>', methods=['GET', 'POST'])
+def reject(id, applicant_id):
+    app = Application.query.filter_by(post_id=id, applicant_id=applicant_id).first()
+    post = Post.query.get_or_404(id)
+    app_count = post.applicant_count
+    app_count = int(app_count) - 1
+    post.applicant_count = app_count
+    db.session.delete(app)
+    flash('Applicant ' + app.applicant.username + ' deleted')
+    return redirect(url_for('.post', id=id))
 
 @main.route('/user/<username>')
 def user(username):

@@ -360,6 +360,7 @@ class Application(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     applicant_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    approved = db.Column(db.Boolean, default=0)
 
 class Comment(db.Model):
     __tablename__ = 'comments'

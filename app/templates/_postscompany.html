@@ -34,6 +34,18 @@
             {% endfor %} -->
 
             <div class="post-footer">
+
+                {% if post.applicant_count != 0 %}
+                <a href="{{ url_for('.applicants', id=post.id) }}">
+                    <span class="label label-warning" id="view">{{ post.applicant_count }} Applicants</span>
+                </a>
+                {% endif %}
+
+                {% if not current_user.company %}
+                <a href="{{ url_for('.apply', id=post.id) }}">
+                    <span class="label label-info" id="view">Apply</span>
+                </a>
+                {% endif %}
                 {% if current_user == post.author %}
                 <a href="{{ url_for('.edit', id=post.id) }}">
                     <span class="label label-primary" id="view">Edit</span>
@@ -41,18 +53,6 @@
                 {% elif current_user.is_administrator() %}
                 <a href="{{ url_for('.edit', id=post.id) }}">
                     <span class="label label-danger">Edit [Admin]</span>
-                </a>
-                {% endif %}
-
-                {% if post.applicant_count != 0 %}
-                <a href="{{ url_for('.applicants', id=post.id) }}">
-                    <span class="label label-danger" id="view">{{ post.applicant_count }} Applicants</span>
-                </a>
-                {% endif %}
-
-                {% if not current_user.company %}
-                <a href="{{ url_for('.apply', id=post.id) }}">
-                    <span class="label label-info" id="view">Apply</span>
                 </a>
                 {% endif %}
                 <a href="{{ url_for('.post', id=post.id) }}#comments">
