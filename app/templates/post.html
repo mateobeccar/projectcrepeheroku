@@ -9,20 +9,4 @@
 {% include '_postsview.html' %}
 {% if current_user.id == post.id %}
 {% endif %}
-{% if current_user.can(Permission.COMMENT) %}
-
-{% endif %}
-{% if current_user.id == posts[0].author_id %}
-<h2 id="comments">Messages</h2>
-<div class="comment-form">
-    {{ wtf.quick_form(form) }}
-</div>
-{% include '_comments.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=posts[0].id) }}
-</div>
-{% endif %}
-{% endif %}
-
 {% endblock %}

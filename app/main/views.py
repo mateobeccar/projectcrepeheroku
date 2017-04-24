@@ -4,9 +4,9 @@ from flask_login import login_required, current_user
 from flask_sqlalchemy import get_debug_queries
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, PostForm,\
-    CommentForm, EditCompanyProfileForm, ApplicantForm
+    CommentForm, EditCompanyProfileForm, ApplicantForm, TaskForm
 from .. import db
-from ..models import Permission, Role, User, Post, Comment, Application
+from ..models import Permission, Role, User, Post, Comment, Application, Task
 from ..decorators import admin_required, permission_required
 
 
@@ -113,9 +113,34 @@ def applicants(id):
 @login_required
 def hired(id):
     post = Post.query.get_or_404(id)
-    apps = Application.query.filter_by(post_id=id)
-    return render_template('applicants.html', post=
-    post, apps=apps)
+    apps = Application.query.filter_by(post_id=id, approved=True)
+    tasks = Task.query.filter_by(post_id=id, done=False)
+    form1 = CommentForm(prefix="form1")
+    form2 = TaskForm(prefix="form2")
+    if form1.validate_on_submit():
+        comment = Comment(body=form.body.data,
+                          post=post,
+                          author=current_user._get_current_object())
+        db.session.add(comment)
+        flash('Your comment has been published.')
+        return redirect(url_for('.post', id=post.id, page=-1))
+    if form2.validate_on_submit():
+        for app in apps:
+            task = Task(description=form2.body.data, post_id=id,
+                              worker_id=app.applicant_id)
+            db.session.add(task)
+        flash('Your task has been sent out.')
+        return redirect(url_for('.hired', id=post.id, page=-1))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() - 1) // \
+            current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('workers.html', post=
+    post, posts=[post], comments=comments, form=form1, form2=form2, pagination=pagination, tasks=tasks, apps=apps)
 
 @main.route('/approve/<int:id>/<int:applicant_id>', methods=['GET', 'POST'])
 def approve(id, applicant_id):
@@ -125,6 +150,9 @@ def approve(id, applicant_id):
     app_count = post.applicant_count
     app_count = int(app_count) - 1
     post.applicant_count = app_count
+    post_workers = post.workers
+    post_workers = int(post.workers) + 1
+    post.workers = post_workers
     flash('Applicant ' + app.applicant.username + ' approved')
     return redirect(url_for('.post', id=id))
 
@@ -246,8 +274,7 @@ def post(id):
         page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
         error_out=False)
     comments = pagination.items
-    return render_template('post.html', post=post, posts=[post], form=form,
-                           comments=comments, pagination=pagination)
+    return render_template('post.html', post=post, posts=[post])
 
 
 @main.route('/edit/<int:id>', methods=['GET', 'POST'])

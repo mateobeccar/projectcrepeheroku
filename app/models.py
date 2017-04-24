@@ -81,6 +81,7 @@ class User(UserMixin, db.Model):
     avatar_hash = db.Column(db.String(32))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     applications = db.relationship('Application', backref='applicant', lazy='dynamic')
+    tasks = db.relationship('Task', backref='worker', lazy='dynamic')
     followed = db.relationship('Follow',
                                foreign_keys=[Follow.follower_id],
                                backref=db.backref('follower', lazy='joined'),
@@ -301,7 +302,9 @@ class Post(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     applicant_id = db.Column(db.Integer)
     applicant_count = db.Column(db.Integer, default=0)
+    workers = db.Column(db.Integer, default=0)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
+    # tasks = db.relationship('Task', backref='studentworker', lazy='dynamic')
     applications = db.relationship('Application', backref='post', lazy='dynamic')
 
 
@@ -361,6 +364,15 @@ class Application(db.Model):
     applicant_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
     approved = db.Column(db.Boolean, default=0)
+
+class Task(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    worker_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+    done = db.Column(db.Boolean, default=0)
 
 class Comment(db.Model):
     __tablename__ = 'comments'

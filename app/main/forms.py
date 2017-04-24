@@ -79,3 +79,7 @@ class ApplicantForm(Form):
 class CommentForm(Form):
     body = StringField('Enter your message', validators=[Required()])
     submit = SubmitField('Send')
+
+class TaskForm(Form):
+    body = StringField('Set a task for this job', validators=[Required()])
+    submit = SubmitField('Post to hired students')

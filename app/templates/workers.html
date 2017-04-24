@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Campus Connect - Post{% endblock %}
+
+{% block page_content %}
+{% include '_workers.html' %}
+<h2 id="comments">Messages</h2>
+{% if current_user.is_authenticated %}
+<div class="comment-form">
+    {{ wtf.quick_form(form) }}
+</div>
+{% include '_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=posts[0].id) }}
+</div>
+{% endif %}
+
+<h2 id="comments">Set Task</h2>
+{{ wtf.quick_form(form2) }}
+<section class="box">
+<ul class="alt">
+  <h3> Task Status </h3>
+{% for task in tasks %}
+  <li>{{ task.description }} {% if task.done %} <b> Completed </b> {% else %} <b> Not Completed Yet </b> {% endif %}</li>
+{% endfor %}
+</ul>
+</section>
+{% endif %}
+{% endblock %}
