@@ -1895,6 +1895,10 @@
 			margin: 3em 0;
 		}
 
+		.navbar {
+	  border-bottom: 0;
+	}
+
 	blockquote {
 		border-left: solid 4px #e5e5e5;
 		font-style: italic;
