@@ -183,7 +183,7 @@ def approve(id, applicant_id):
     app_count = int(app_count) - 1
     post.applicant_count = app_count
     post_workers = post.workers
-    post_workers = int(post.workers) + 1
+    post_workers = post.workers + 1
     post.workers = post_workers
     flash('Applicant ' + app.applicant.username + ' approved')
     return redirect(url_for('.post', id=id))
