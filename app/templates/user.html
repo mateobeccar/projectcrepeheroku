@@ -12,7 +12,9 @@
           {{ user.name }}
           {% else %}
           {{ user.username }}
+          {% if not current_user.company %}
           <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add Real Name</a>
+          {% endif %}
           {% endif %} </h2>
           {% if user.name or user.location %}
         <p>
@@ -29,10 +31,22 @@
         <p>
             </p>
             <p>
-            <b>University:</b> {% if not user.university %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add University</a>
-            {% else %} {{ user.university}}{% endif %}</p>
-            <p><b>Year:</b> {% if not user.year %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add Year</a>
-            {% else %} {{ user.year}}{% endif %}
+            <b>University:</b>
+            {% if not current_user.company %}
+             {% if not user.university %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add University</a>
+            {% else %} {{ user.university}}{% endif %}
+            {% else %}
+            {% if not user.university %} N/A
+            {% else %} {{ user.university}} {% endif %}
+            {% endif %}</p>
+            <p><b>Year:</b>
+              {% if not current_user.company %}
+              {% if not user.year %} <a class="btn btn-default" href="{{ url_for('.edit_profile') }}"> Add Year</a>
+              {% else %} {{ user.year}}{% endif %}
+              {% else %}
+              {% if not user.year %} N/A
+              {% else %} {{ user.year}}{% endif %}
+              {% endif %}         
           </p>
           <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
             {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
@@ -50,13 +64,8 @@
     </div>
   </section>
 </div>
-<h2>Jobs done by
-{% if user.name %}
-{{ user.name }}
-{% else %}
-{{ user.username }}
-{% endif %} </h2>
-{% include '_posts.html' %}
+<h2> Manage Jobs </h2>
+{% include '_postsuserdashboard.html' %}
 {% if user.jobs_done %}
   {% if pagination %}
     <div class="pagination">
@@ -65,7 +74,6 @@
   {% endif %}
 {% else %}
 <div id="textspacing">
-<h3> No jobs completed yet <h3>
 </div>
 {% endif %}
 

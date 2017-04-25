@@ -7,9 +7,6 @@
 {% block page_content %}
 <br>
 <h2> {{ posts[0].title }} </h2>
-{% for app in apps %}
-{% endfor %}
-{% include '_workers.html' %}
 <h3 id="comments">Messages</h3>
 {% if current_user.is_authenticated %}
 <div class="comment-form">
@@ -22,13 +19,15 @@
 </div>
 {% endif %}
 
-<h3 id="comments">Set Task</h3>
-{{ wtf.quick_form(form2) }}
 <section class="box">
 <ul class="alt">
-  <h3> Tasks Status </h3>
+  <h3> Tasks Assigned </h3>
 {% for task in tasks %}
-  <li>{{ task.description }} {% if task.done %} <b> Completed </b> {% else %} <b> Not Completed Yet </b> {% endif %}</li>
+  <li>{{ task.description }} {% if task.done %} <b> Completed </b> {% else %}
+    <a href="{{ url_for('.completetask', id=task.id, postid=posts[0].id) }}#comments">
+          <span class="label label-success" id="view2">Mark as completed</span>
+      </a> {% endif %}
+</li>
 {% endfor %}
 </ul>
 </section>
