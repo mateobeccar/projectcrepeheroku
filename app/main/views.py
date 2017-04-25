@@ -142,6 +142,38 @@ def hired(id):
     return render_template('workers.html', post=
     post, posts=[post], comments=comments, form=form1, form2=form2, pagination=pagination, tasks=tasks, apps=apps)
 
+@main.route('/studenthired/<int:id>', methods=['GET', 'POST'])
+@login_required
+def studenthired(id):
+    post = Post.query.get_or_404(id)
+    apps = Application.query.filter_by(post_id=id, approved=True)
+    tasks = Task.query.filter_by(post_id=id, worker_id=current_user.id)
+    form1 = CommentForm(prefix="form1")
+    if form1.validate_on_submit():
+        comment = Comment(body=form1.body.data,
+                          post=post,
+                          author=current_user._get_current_object())
+        db.session.add(comment)
+        flash('Your message has been sent.')
+        return redirect(url_for('.studenthired', id=post.id, page=-1))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() - 1) // \
+            current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
+        error_out=False)
+    comments = pagination.items
+    return render_template('studentworkers.html', post=
+    post, posts=[post], comments=comments, form=form1, pagination=pagination, tasks=tasks, apps=apps)
+
+@main.route('/completetask/<int:id>/<int:postid>', methods=['GET', 'POST'])
+def completetask(id, postid):
+    task = Task.query.get_or_404(id)
+    task.done = True
+    flash("Task Completed")
+    return redirect(url_for('.studenthired', id=postid))
+
 @main.route('/approve/<int:id>/<int:applicant_id>', methods=['GET', 'POST'])
 def approve(id, applicant_id):
     app = Application.query.filter_by(post_id=id, applicant_id=applicant_id).first()
@@ -167,16 +199,20 @@ def reject(id, applicant_id):
     flash('Applicant ' + app.applicant.username + ' deleted')
     return redirect(url_for('.post', id=id))
 
+@main.route('/job_completed/<int:id>', methods=['GET', 'POST'])
+def job_completed(id):
+    post = Post.query.get_or_404(id)
+    post.job_completed = True
+    flash('Job completed')
+    return redirect(url_for('.company', username=current_user.username))
+
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
+    apps = Application.query.filter_by(applicant_id=user.id, approved=True)
     page = request.args.get('page', 1, type=int)
-    pagination = user.posts.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-        error_out=False)
-    posts = pagination.items
-    return render_template('user.html', user=user, posts=posts,
-                           pagination=pagination)
+    posts = Post.query.all()
+    return render_template('user.html', user=user, posts=posts, apps=apps)
 
 @main.route('/company/<username>')
 def company(username):

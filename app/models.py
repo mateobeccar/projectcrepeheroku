@@ -303,6 +303,7 @@ class Post(db.Model):
     applicant_id = db.Column(db.Integer)
     applicant_count = db.Column(db.Integer, default=0)
     workers = db.Column(db.Integer, default=0)
+    job_completed = db.Column(db.Boolean, default=False)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     # tasks = db.relationship('Task', backref='studentworker', lazy='dynamic')
     applications = db.relationship('Application', backref='post', lazy='dynamic')

@@ -31,6 +31,11 @@
                     <span class="label label-danger">Edit [Admin]</span>
                 </a>
                 {% endif %}
+                {% if current_user == post.author %}
+                <a href="{{ url_for('.job_completed', id=post.id) }}">
+                    <span class="label label-success" id="view">Mark Job as Completed</span>
+                </a>
+                {% endif %}
                 {% if not current_user.company %}
                 <a href="{{ url_for('.apply', id=post.id) }}">
                     <span class="label label-info" id="view">Apply</span>
