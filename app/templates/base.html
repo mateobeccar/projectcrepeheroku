@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}CampusConnect{% endblock %}
+{% block title %}Campus Connect{% endblock %}
 
 {% block head %}
 <script>
@@ -28,7 +28,7 @@ ga('send', 'pageview');
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Campus Connect</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Campus Connect" /></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
